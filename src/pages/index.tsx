@@ -2,16 +2,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { toast } from 'react-toastify';
-import {useTranslation} from 'next-i18next'
+//import {useTranslation} from 'next-i18next'
 import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
-const {t} =useTranslation('header')
+//const {t} =useTranslation('header')
 const Home = () => {
 
   const handleClick = () => {
     debugger
-    console.log(t('title'))
+    //console.log(t('title'))
     toast.warning("Thông báo ! ")
   }
   return (
