@@ -1,0 +1,10 @@
+{
+    "header":{
+        "about":"Thông tin",
+        "home":"Trang chủ",
+        "blog":"Tin tức"
+    },
+    "index":{
+        "title":"Xin chào tới với next,js"
+    }
+}

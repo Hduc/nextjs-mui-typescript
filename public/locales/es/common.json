@@ -1,0 +1,10 @@
+{
+    "header":{
+        "about":"about",
+        "home":"home",
+        "blog":"blog"
+    },
+    "index":{
+        "title":"hello, web"
+    }
+}

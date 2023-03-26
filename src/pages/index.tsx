@@ -2,13 +2,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { toast } from 'react-toastify';
-import {useTranslation} from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
-const {t} =useTranslation('header')
-const Home = () => {
 
+const Home = () => {
+const { t } = useTranslation('common')
   const handleClick = () => {
     debugger
     console.log(t('title'))
@@ -24,8 +24,9 @@ const Home = () => {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
+          {t('title')}
           <p>
-            Get started by editing&nbsp; test render
+            Get started by editing&nbsp; test render 123
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
 

@@ -6,10 +6,10 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  i18n:{
-    locales:['vi','es'],
-    defaultLocale:'vi'
-  }
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'de'],
+  },
 }
 
 module.exports = nextConfig
