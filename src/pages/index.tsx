@@ -11,7 +11,7 @@ const Home = () => {
 const { t } = useTranslation('common')
   const handleClick = () => {
     debugger
-    console.log(t('title'))
+    //console.log(t('title'))
     toast.warning("Thông báo ! ")
   }
   return (
