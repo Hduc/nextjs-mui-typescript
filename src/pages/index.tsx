@@ -50,7 +50,6 @@ const Home = (_props: InferGetStaticPropsType<typeof getStaticProps>) => {
           <Trans i18nKey="language">
             Then check out
             <a href={t('urls.home')}>this blog post</a>
-            .
           </Trans>
           <div>
             <a
