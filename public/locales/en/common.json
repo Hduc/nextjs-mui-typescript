@@ -1,4 +1,8 @@
 {
+    "language":"en",
+    "urls":{
+        "home":"/en/home"
+    },
     "header":{
         "about":"about",
         "home":"home",

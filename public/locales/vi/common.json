@@ -1,4 +1,8 @@
 {
+    "language":"vi",
+    "urls":{
+        "home":"/vi/home"
+    },
     "header":{
         "about":"Thông tin",
         "home":"Trang chủ",

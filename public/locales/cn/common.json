@@ -1,4 +1,8 @@
 {
+    "language":"cn",
+    "urls":{
+        "home":"/cn/home"
+    },
     "header":{
         "about":"Thông tin",
         "home":"Trang chủ",

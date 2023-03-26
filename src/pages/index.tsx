@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { toast } from 'react-toastify';
-import { useTranslation,Trans } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export async function getStaticProps({ locale }: any) {
   return {
@@ -19,8 +20,8 @@ export async function getStaticProps({ locale }: any) {
   };
 }
 const Home = (_props: InferGetStaticPropsType<typeof getStaticProps>) => {
-const { t } = useTranslation()
-const router = useRouter()
+  const { t } = useTranslation()
+  const router = useRouter()
   const handleClick = () => {
     debugger
     //console.log(t('title'))
@@ -46,11 +47,11 @@ const router = useRouter()
             Get started by editing&nbsp; test render 123
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
-          <Trans i18nKey="blog.appDir.answer">
-                Then check out
-                <a href={t('blog.optimized.link')}>this blog post</a>
-                .
-              </Trans>
+          <Trans i18nKey="language">
+            Then check out
+            <a href={t('urls.home')}>this blog post</a>
+            .
+          </Trans>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
