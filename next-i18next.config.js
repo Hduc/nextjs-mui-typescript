@@ -1,14 +1,14 @@
 // @ts-check
-
 /**
  * @type {import('next-i18next').UserConfig}
  */
 module.exports = {
     debug: process.env.NODE_ENV === 'development',
     i18n: {
-      defaultLocale: 'en',
-      locales: ['en', 'de'],
+      defaultLocale: 'vi',
+      locales: ['vi', 'en','cn'],
     },
+    react: { useSuspense: false },
     localePath:
       typeof window === 'undefined'
         ? require('path').resolve('./public/locales')
