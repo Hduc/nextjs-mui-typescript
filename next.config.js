@@ -1,15 +1,18 @@
-/** @type {import('next').NextConfig} */
-// @ts-check
-const { i18n } = require('./next-i18next.config.js')
+const path = require('path')
 
-const path = require('path');
-
-const nextConfig = {
-  reactStrictMode: true,
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+module.exports = {
+  trailingSlash: true,
+  reactStrictMode: false,
+  experimental: {
+    esmExternals: false,
+    jsconfigPaths: true // enables it for both jsconfig.json and tsconfig.json
   },
-  i18n
-}
+  webpack: config => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
+    }
 
-module.exports = nextConfig
+    return config
+  }
+}
