@@ -39,6 +39,8 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
+import { signIn, signOut, useSession } from "next-auth/react";
+
 interface State {
   password: string
   showPassword: boolean
@@ -63,6 +65,7 @@ const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(({ t
 }))
 
 const LoginPage = () => {
+  const { data: session, status } = useSession();
   // ** State
   const [values, setValues] = useState<State>({
     password: '',
@@ -84,7 +87,10 @@ const LoginPage = () => {
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
   }
-
+  const handleOnSubmit = (event: any) => {
+    event.preventDefault()
+    signIn("identity-server4")
+  }
   return (
     <Box className='content-center'>
       <Card sx={{ zIndex: 1 }}>
@@ -167,8 +173,21 @@ const LoginPage = () => {
               Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
+
+            {!session && (
+              <>
+                Not signed in <br />
+                <button onClick={() => signIn("identity-server4")}>Sign in</button>
+              </>
+            )}
+            {session && (
+              <>
+                Signed in as {session.user.email} <br />
+                <button onClick={() => signOut()}>Sign out</button>
+              </>
+            )}
           </Box>
-          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
+          <form noValidate autoComplete='off' onSubmit={handleOnSubmit}>
             <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
@@ -205,7 +224,7 @@ const LoginPage = () => {
               size='large'
               variant='contained'
               sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
+              onClick={handleOnSubmit}
             >
               Login
             </Button>

@@ -29,6 +29,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 
 // ** Global css styles
 import '../../styles/globals.css'
+import { SessionProvider } from 'next-auth/react'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -59,6 +60,7 @@ const App = (props: ExtendedAppProps) => {
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
   return (
+    <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
@@ -78,6 +80,7 @@ const App = (props: ExtendedAppProps) => {
         </SettingsConsumer>
       </SettingsProvider>
     </CacheProvider>
+    </SessionProvider>
   )
 }
 
