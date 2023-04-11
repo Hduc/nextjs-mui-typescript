@@ -32,6 +32,9 @@ import '../../styles/globals.css'
 import { AuthProvider } from 'react-oidc-context'
 import { ApolloProvider } from '@apollo/client'
 import client from 'src/lib/apollo-client'
+import { useEffect } from 'react'
+import { loadUserFromStorage } from 'src/services/userService'
+import store from './store'
 // import { SessionProvider } from 'next-auth/react'
 
 // ** Extend App Props with Emotion
@@ -57,6 +60,10 @@ if (themeConfig.routingLoader) {
 
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
+  useEffect(() => {
+    // fetch current user from cookies
+    loadUserFromStorage(store)
+  }, [])
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
   // Variables
