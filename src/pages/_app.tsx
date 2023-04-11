@@ -29,7 +29,10 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 
 // ** Global css styles
 import '../../styles/globals.css'
-import { SessionProvider } from 'next-auth/react'
+import { AuthProvider } from 'react-oidc-context'
+import { ApolloProvider } from '@apollo/client'
+import client from 'src/lib/apollo-client'
+// import { SessionProvider } from 'next-auth/react'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -59,8 +62,21 @@ const App = (props: ExtendedAppProps) => {
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
+  const oidcConfig = {
+    authority: "https://localhost:5001",
+    client_id: "client1",
+    redirect_uri: "http://localhost:3000",
+    response_type: "code",
+    scopes: "openid email"
+  };
+  const onSignin = () => {
+    location.href = "/";
+  };
+  
   return (
-    <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
+    <AuthProvider {...oidcConfig} onSigninCallback={onSignin}>
+      <ApolloProvider client={client}>
+    {/* <SessionProvider session={pageProps.session} refetchInterval={5 * 60}> */}
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
@@ -80,7 +96,10 @@ const App = (props: ExtendedAppProps) => {
         </SettingsConsumer>
       </SettingsProvider>
     </CacheProvider>
-    </SessionProvider>
+    </ApolloProvider>
+    </AuthProvider>
+
+    //  </SessionProvider>
   )
 }
 

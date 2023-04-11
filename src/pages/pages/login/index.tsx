@@ -39,8 +39,8 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
-import { signIn, signOut, useSession } from "next-auth/react";
-
+// import { signIn, signOut, useSession } from "next-auth/react";
+import { useAuth } from 'react-oidc-context';
 interface State {
   password: string
   showPassword: boolean
@@ -65,7 +65,26 @@ const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(({ t
 }))
 
 const LoginPage = () => {
-  const { data: session, status } = useSession();
+  const auth = useAuth();
+  debugger
+  if (auth.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (auth.error) {
+    return <div>Oops... {auth.error.message}</div>;
+  }
+
+  if (auth.isAuthenticated) {
+    return (
+      <div>
+        Hello {auth.user?.profile.sub}{" "}
+        <button onClick={auth.removeUser}>Log out</button>
+      </div>
+    );
+  }
+  return (<button onClick={auth.signinRedirect}>Log in</button>);
+  // const { data: session, status } = useSession();
   // ** State
   const [values, setValues] = useState<State>({
     password: '',
@@ -89,7 +108,7 @@ const LoginPage = () => {
   }
   const handleOnSubmit = (event: any) => {
     event.preventDefault()
-    signIn("identity-server4")
+    //signIn("identity-server4")
   }
   return (
     <Box className='content-center'>
@@ -173,7 +192,7 @@ const LoginPage = () => {
               Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
-
+{/* 
             {!session && (
               <>
                 Not signed in <br />
@@ -182,11 +201,11 @@ const LoginPage = () => {
             )}
             {session && (
               <>
-                Signed in as {session.user.email} <br />
+                Signed in as {session.user && session.user.email} <br />
                 <button onClick={() => signOut()}>Sign out</button>
               </>
-            )}
-          </Box>
+            )} */}
+          </Box>--
           <form noValidate autoComplete='off' onSubmit={handleOnSubmit}>
             <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
             <FormControl fullWidth>
