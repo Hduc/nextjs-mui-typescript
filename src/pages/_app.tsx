@@ -63,8 +63,8 @@ const App = (props: ExtendedAppProps) => {
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
   const oidcConfig = {
-    authority: "https://localhost:5001",
-    client_id: "client1",
+    authority: "https://identity.minhlong.com/",
+    client_id: "sso",
     redirect_uri: "http://localhost:3000",
     response_type: "code",
     scopes: "openid email"
